@@ -1,0 +1,17 @@
+{
+    "name": "srssaulo/pnp",
+    "autoload": {
+        "psr-4": {
+            "Srssaulo\\Dslinks\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "saulo.sa",
+            "email": "srssaulo@gmail.com"
+        }
+    ],
+    "require": {
+        "sendgrid/php-http-client": "^4.0.0"
+    }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/pnp/db" VERSION="20220406" COMMENT="XMLDB file for pnp"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+    <TABLES>
+        <TABLE NAME="pnp_sent" COMMENT="Sempre que exportar uma issue anotar em uma tabela pnp_enviado o id_issue, a data_envio.">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+                <FIELD NAME="id_issue" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="id certificate issue" />
+                <FIELD NAME="sent_time" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="timestamp send" />
+                <FIELD NAME="resent_time" TYPE="int" LENGTH="10" NOTNULL="false"  DEFAULT="0" UNSIGNED="true" SEQUENCE="false" COMMENT="in case of re-sent certificate" />
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            </KEYS>
+        </TABLE>
+
+    </TABLES>
+</XMLDB>
