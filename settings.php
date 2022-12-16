@@ -21,36 +21,38 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
+define('PLUGIN_NAME', 'local_pnp');
 
-if ($ADMIN->fulltree) {
-    //dependecy ldap settingslib
-    require_once($CFG->dirroot.'/enrol/ldap/settingslib.php');
+$ADMIN->add('localplugins', new admin_category('local_pnp', get_string('pluginname', PLUGIN_NAME)));
+$page = new admin_settingpage('pnpconfs', get_string('pnpconfs', PLUGIN_NAME));
+//dependecy ldap settingslib
+require_once($CFG->dirroot . '/enrol/ldap/settingslib.php');
 
-    define('PLUGIN_NAME', 'local_pnp');
 
-    $settings->add(new admin_setting_configtext(
-        PLUGIN_NAME.'/certid',
-        get_string('certid', PLUGIN_NAME),
-        get_string('certid_', PLUGIN_NAME),
-        '',
-        PARAM_INT,
-    ));
+$page->add(new admin_setting_configtext(
+    PLUGIN_NAME . '/certid',
+    get_string('certid', PLUGIN_NAME),
+    get_string('certid_', PLUGIN_NAME),
+    '',
+    PARAM_INT,
+));
 
-    $settings->add(new admin_setting_configtext_trim_lower(
-        PLUGIN_NAME.'/uribase',
-        get_string('uribase', PLUGIN_NAME),
-        get_string('uribase_', PLUGIN_NAME),
-        '',
-        true,
-    ));
+$page->add(new admin_setting_configtext_trim_lower(
+    PLUGIN_NAME . '/uribase',
+    get_string('uribase', PLUGIN_NAME),
+    get_string('uribase_', PLUGIN_NAME),
+    '',
+    true,
+));
 
-    $settings->add(new admin_setting_configtext_trim_lower(
-        PLUGIN_NAME.'/token',
-        get_string('token', PLUGIN_NAME),
-        get_string('token_', PLUGIN_NAME),
-        '',
-        false,
-    ));
+$page->add(new admin_setting_configtext_trim_lower(
+    PLUGIN_NAME . '/token',
+    get_string('token', PLUGIN_NAME),
+    get_string('token_', PLUGIN_NAME),
+    '',
+    false,
+));
 
-}
+$ADMIN->add('local_pnp', $page);
+
 

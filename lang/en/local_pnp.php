@@ -23,6 +23,7 @@
 $string['pluginname'] = 'Send Certificate Issues PNP' ;
 $string['privacy:metadata'] = 'This block only offers the possibility to apply standard operations on multiple course modules at the same time.
 Thus, no data is being stored by this block.';
+$string['pnpconfs'] = 'Send Certficate Issued PNP confs';
 
 //SETTINGS FIELDS
 $string['certid'] = 'Certificate ID';
