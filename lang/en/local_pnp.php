@@ -25,8 +25,8 @@ $string['privacy:metadata'] = 'This block only offers the possibility to apply s
 Thus, no data is being stored by this block.';
 
 //SETTINGS FIELDS
-$string['certificateid'] = 'Certificate ID';
-$string['certificateid_'] = 'Moodle Certificate ID to check issued';
+$string['certid'] = 'Certificate ID';
+$string['certid_'] = 'Moodle Certificate ID to check issued';
 $string['uribase'] = 'External base URI';
 $string['uribase_'] = 'External base URI';
 $string['token'] = 'Token';

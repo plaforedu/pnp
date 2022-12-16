@@ -29,9 +29,9 @@ if ($ADMIN->fulltree) {
     define('PLUGIN_NAME', 'local_pnp');
 
     $settings->add(new admin_setting_configtext(
-        PLUGIN_NAME.'/certificateid',
-        get_string('certificateid', BLOCK_NAME),
-        get_string('certificateid_', BLOCK_NAME),
+        PLUGIN_NAME.'/certid',
+        get_string('certid', PLUGIN_NAME),
+        get_string('certid_', PLUGIN_NAME),
         '',
         PARAM_INT,
     ));
