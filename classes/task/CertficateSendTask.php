@@ -27,6 +27,8 @@
 namespace local_pnp\task;
 defined('MOODLE_INTERNAL') || die();
 
+use local_pnp\connect;
+
 class CertficateSendTask extends \core\task\scheduled_task
 {
 
@@ -44,7 +46,9 @@ class CertficateSendTask extends \core\task\scheduled_task
      */
     public function execute()
     {
-        // TODO: Implement execute() method.
-        // TODO: lê os certificados que ainda não foram enviados para um entrypoint
+        $connect = new connect();
+        $response = $connect->sent_data();
+
+        //TODO register all success user registered
     }
 }
