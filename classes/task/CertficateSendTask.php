@@ -46,8 +46,6 @@ class CertficateSendTask extends \core\task\scheduled_task
      */
     public function execute()
     {
-        // TODO: Implement execute() method.
-        // TODO: lê os certificados que ainda não foram enviados para um entrypoint
         $connect = new connect();
         $response = $connect->sent_data();
 
