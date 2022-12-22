@@ -25,7 +25,7 @@ class utils
      * @param $uid
      * @return object
      */
-    public static function get_user_data_to_send(int $uid): object
+    private static function get_user_data_to_send(int $uid, $certcode, $certtimecreated): object
     {
         global $DB;
 
@@ -37,22 +37,62 @@ class utils
         $db_user = $DB->get_record('user', ['id' => $uid], 'id, firstname, lastname', MUST_EXIST);//exception throws
 
         $user = new \stdClass();
-        $user->user_id = $db_user->id;
+        $user->user_id = intval($db_user->id);//int casting
         $user->fullname = $db_user->firstname . ' ' . $db_user->lastname;
         $user->cpf = $DB->get_record_sql(
             "SELECT uid.id, uid.data FROM {user_info_field} AS uif
                  INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
-                 WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? ",
+                 WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
             ['cpf', 'text', $db_user->id],
             MUST_EXIST)->data;//exception throws
 
-        //certificate issue data. User only generate unique certificate using specific certificate id
-        $cert_issued = $DB->get_record('customcert_issues', ['customcertid' => $confs->certid, 'userid' => $db_user->id], 'id, code, timecreated');
-
-        $user->emissao_certificado = $cert_issued->timecreated;
-        $user->codigo_validacao = $cert_issued->code;
+        $user->emissao_certificado = $certtimecreated;
+        $user->codigo_validacao = $certcode;
 
         return $user;
+    }
+
+    /**
+     * returns users issued that was not sent
+     * @param bool $json
+     * @return array
+     * @throws \dml_exception
+     */
+    public static function issued_user_data_objects(bool $json=true)
+    {
+        global $DB;
+
+        $user_array_to_send = [];
+
+        $confs = self::get_confs_values();
+
+        if (!$confs->certid) {
+            throw new \Exception('Conf Certificate ID must exists');
+        }
+
+        //only get certificates were not sent
+        $certficates_issued = $DB->get_records_sql(
+            "
+                    SELECT ci.id, ci.userid, ci.code, ci.timecreated FROM {customcert_issues} AS ci
+                    LEFT JOIN {pnp_sent} AS ps ON ci.id = ps.id_issue
+                    WHERE ps.id is null AND ci.customcertid = ?
+              ",
+            [$confs->certid]
+        );
+
+        foreach ($certficates_issued as $issued) {
+            $user_array_to_send[] = self::get_user_data_to_send(
+                $issued->userid,
+                $issued->code,
+                $issued->timecreated
+            );
+        }
+
+        if($json) {
+            return json_encode($user_array_to_send);
+        }
+        return $user_array_to_send;
+
     }
 
 

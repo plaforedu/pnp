@@ -14,7 +14,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $tasks = array(
     array(
-        'classname' => 'local_pnp\task\UpdateSynchedCoursesTask',
+        'classname' => 'local_pnp\task\CertificateSendTask',
         'blocking' => 0,
         'minute' => '01',
         'hour' => '0',

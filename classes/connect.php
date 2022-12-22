@@ -32,6 +32,12 @@ class connect
         ];
 
         $client = new Client($this->uribase, $authHeaders);
+        $body_data = utils::issued_user_data_objects();
+
+        $response = $client->post($body_data, null, null);
+
+        //TODO register all success user registered
+        return $response;
 
     }
 
