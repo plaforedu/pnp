@@ -2,7 +2,7 @@
     "name": "srssaulo/pnp",
     "autoload": {
         "psr-4": {
-            "Srssaulo\\Dslinks\\": "src/"
+            "Srssaulo\\Pnp\\": "src/"
         }
     },
     "authors": [
