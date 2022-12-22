@@ -1,4 +1,7 @@
 # pnp
 
 ATT! Please install dependencies.
-> compose install
+> composer install
+
+Or download <b>tag</b>: 
+> composer_compiled
