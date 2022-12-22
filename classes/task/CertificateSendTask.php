@@ -27,9 +27,9 @@
 namespace local_pnp\task;
 defined('MOODLE_INTERNAL') || die();
 
-use local_pnp\connect;
+use local_pnp\task;
 
-class CertficateSendTask extends \core\task\scheduled_task
+class CertificateSendTask extends \core\task\scheduled_task
 {
 
     /**
@@ -38,7 +38,7 @@ class CertficateSendTask extends \core\task\scheduled_task
     public function get_name()
     {
         // TODO: Implement get_name() method.
-        return get_string('CertficateSendTask', 'local_pnp');
+        return get_string('certificatesendtask', 'local_pnp');
     }
 
     /**

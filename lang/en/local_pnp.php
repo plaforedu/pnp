@@ -32,7 +32,7 @@ $string['uribase'] = 'External base URI';
 $string['uribase_'] = 'External base URI';
 $string['token'] = 'Token';
 $string['token_'] = 'Token to connect external service';
-$string['certficatesendtask'] = 'Sync certificate task PNP';
+$string['certificatesendtask'] = 'Sync certificate task PNP';
 
 
 

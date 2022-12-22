@@ -1,7 +1,9 @@
 <?php
 
 namespace local_pnp;
-use local_pnp\utils;
+
+require_once ($CFG->dirroot.'/local/pnp/vendor/autoload.php');
+
 use SendGrid\Client;
 class connect
 {
