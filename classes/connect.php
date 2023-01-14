@@ -3,7 +3,6 @@
 namespace local_pnp;
 
 require_once ($CFG->dirroot.'/local/pnp/vendor/autoload.php');
-
 use SendGrid\Client;
 class connect
 {
@@ -33,8 +32,12 @@ class connect
             'Authorization: Bearer ' .  $this->token
         ];
 
+
+
         $client = new Client($this->uribase, $authHeaders);
         $body_data = utils::issued_user_data_objects();
+
+//        print_object($body_data); die;
 
         $response = $client->post($body_data, null, null);
 

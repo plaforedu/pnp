@@ -34,11 +34,11 @@ class utils
             throw new \Exception('Conf Certificate ID must exists');
         }
 
-        $db_user = $DB->get_record('user', ['id' => $uid], 'id, firstname, lastname', MUST_EXIST);//exception throws
+        $db_user = $DB->get_record('user', ['id' => $uid], 'id, firstname, lastname, email', MUST_EXIST);//exception throws
 
         $user = new \stdClass();
         $user->user_id = intval($db_user->id);//int casting
-        $user->fullname = $db_user->firstname . ' ' . $db_user->lastname;
+        $user->nome = $db_user->firstname . ' ' . $db_user->lastname;
         $user->cpf = $DB->get_record_sql(
             "SELECT uid.id, uid.data FROM {user_info_field} AS uif
                  INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
@@ -48,6 +48,7 @@ class utils
 
         $user->emissao_certificado = $certtimecreated;
         $user->codigo_validacao = $certcode;
+        $user->email = $db_user->email;
 
         return $user;
     }
