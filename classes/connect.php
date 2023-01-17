@@ -35,7 +35,7 @@ class connect
 
 
         $client = new Client($this->uribase, $authHeaders);
-        $body_data = utils::issued_user_data_objects();
+        $body_data = utils::issued_user_data_objects(false);
 
 //        print_object($body_data); die;
 
