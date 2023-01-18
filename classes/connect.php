@@ -3,6 +3,7 @@
 namespace local_pnp;
 
 require_once ($CFG->dirroot.'/local/pnp/vendor/autoload.php');
+
 use SendGrid\Client;
 class connect
 {
@@ -35,13 +36,27 @@ class connect
 
 
         $client = new Client($this->uribase, $authHeaders);
-        $body_data = utils::issued_user_data_objects(false);
-
-//        print_object($body_data); die;
+        $body_data = utils::issued_user_data_objects(false);//json parser is not necessary here
 
         $response = $client->post($body_data, null, null);
 
-        //TODO register all success user registered
+        if($response->statusCode() == 200) {
+            $unregistred_users = json_decode($response->body());
+
+            //filter only id fields
+            $unregistred_users = array_map($callback = fn($object):int=>$object->user_id, $unregistred_users);
+
+
+            foreach ($body_data as $user){
+                if(in_array($user->user_id, $unregistred_users)){
+                    continue;
+                }
+                //record users sent
+                $idissue = utils::get_certificate_issue_id($user->user_id);
+                utils::record_pnp_sent($user->user_id,$idissue);
+            }
+        }
+
         return $response;
 
     }

@@ -27,8 +27,7 @@
 namespace local_pnp\task;
 defined('MOODLE_INTERNAL') || die();
 
-use local_pnp\task;
-
+use local_pnp\connect;
 class CertificateSendTask extends \core\task\scheduled_task
 {
 

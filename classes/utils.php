@@ -43,8 +43,19 @@ class utils
             "SELECT uid.id, uid.data FROM {user_info_field} AS uif
                  INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
                  WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
-            ['cpf', 'text', $db_user->id],
-            MUST_EXIST)->data;//exception throws
+            ['cpf', 'text', $db_user->id])->data;//exception throws
+
+        $user->perfil_pnp = $DB->get_record_sql(
+            "SELECT uid.id, uid.data FROM {user_info_field} AS uif
+                 INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
+                 WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
+            ['perfil_pnp', 'menu', $db_user->id])->data;//exception throws
+
+        $user->instituicao_ept = $DB->get_record_sql(
+            "SELECT uid.id, uid.data FROM {user_info_field} AS uif
+                 INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
+                 WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
+            ['instituicao_ept', 'autocomplete', $db_user->id])->data;//exception throws
 
         $user->emissao_certificado = $certtimecreated;
         $user->codigo_validacao = $certcode;
@@ -96,5 +107,36 @@ class utils
 
     }
 
+
+    /**
+     * @param int $userid
+     * @return int customcert_issue id
+     * @throws \dml_exception
+     */
+    public static function  get_certificate_issue_id(int $userid){
+        global $DB;
+        $confs = self::get_confs_values();
+        return $DB->get_record('customcert_issues', ['userid'=>$userid, 'customcertid'=>$confs->certid], 'id')->id;
+    }
+
+    /**
+     * record user that was sent
+     * @param int $iduser
+     * @param int $idissue
+     * @return void
+     * @throws \dml_exception
+     */
+    public static function record_pnp_sent(int $iduser, int $idissue){
+        global $DB;
+
+        //insert register
+        $record = (object)[
+          'id_issue'=>$idissue,
+          'id_user'=>$iduser,
+          'sent_time'=>time()
+        ];
+
+        $DB->insert_record('pnp_sent', $record);
+    }
 
 }

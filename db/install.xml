@@ -8,8 +8,8 @@
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
                 <FIELD NAME="id_issue" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="id certificate issue" />
+                <FIELD NAME="id_user" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Moodle user id" />
                 <FIELD NAME="sent_time" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="timestamp send" />
-                <FIELD NAME="resent_time" TYPE="int" LENGTH="10" NOTNULL="false"  DEFAULT="0" UNSIGNED="true" SEQUENCE="false" COMMENT="in case of re-sent certificate" />
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
