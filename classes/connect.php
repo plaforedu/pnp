@@ -4,7 +4,6 @@ namespace local_pnp;
 
 require_once ($CFG->dirroot.'/local/pnp/vendor/autoload.php');
 
-use core_reportbuilder\local\aggregation\count;
 use SendGrid\Client;
 class connect
 {
