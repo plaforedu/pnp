@@ -51,6 +51,12 @@ class utils
                  WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
             ['perfil_pnp', 'menu', $db_user->id])->data;//exception throws
 
+        $user->instituicao_ept = $DB->get_record_sql(
+            "SELECT uid.id, uid.data FROM {user_info_field} AS uif
+                 INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
+                 WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
+            ['instituicao_ept', 'autocomplete', $db_user->id])->data;//exception throws
+
         $user->emissao_certificado = $certtimecreated;
         $user->codigo_validacao = $certcode;
         $user->email = $db_user->email;
