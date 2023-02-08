@@ -44,6 +44,7 @@ class utils
                  INNER JOIN {user_info_data} AS uid ON uif.id = uid.fieldid 
                  WHERE uif.shortname = ? AND uif.datatype=? AND uid.userid = ? AND uid.data <> ''",
             ['cpf', 'text', $db_user->id])->data;//exception throws
+        $user->cpf = str_pad(preg_replace('/[^0-9]/', '', $user->cpf), 11, '0', STR_PAD_LEFT); //cpf adjust
 
         $user->perfil_pnp = $DB->get_record_sql(
             "SELECT uid.id, uid.data FROM {user_info_field} AS uif
