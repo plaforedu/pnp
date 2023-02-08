@@ -46,15 +46,21 @@ class connect
             //filter only id fields
             $unregistred_users = array_map($callback = fn($object):int=>$object->user_id, $unregistred_users);
 
-
+            $erro_ao_enviar = [];
             foreach ($body_data as $user){
                 if(in_array($user->user_id, $unregistred_users)){
+                    $erro_ao_enviar[] = $user;
                     continue;
                 }
                 //record users sent
                 $idissue = utils::get_certificate_issue_id($user->user_id);
                 utils::record_pnp_sent($user->user_id,$idissue);
             }
+            echo "ERROS AO ENVIAR\n\n";
+            var_dump($erro_ao_enviar);
+        } else {
+            echo "ERRO GERAL AO ENVIAR\n\n";
+            var_dump($response);
         }
 
         return $response;
