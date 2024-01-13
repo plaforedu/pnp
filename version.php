@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_pnp';
-$plugin->version = 2022121601;
+$plugin->version = 2024011302;
 $plugin->requires = 2016052300;
 $plugin->maturity = MATURITY_BETA;
-$plugin->release = '0.1';
+$plugin->release = '1.0.2';
