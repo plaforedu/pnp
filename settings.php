@@ -21,38 +21,43 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-define('PLUGIN_NAME', 'local_pnp');
 
-$ADMIN->add('localplugins', new admin_category('local_pnp', get_string('pluginname', PLUGIN_NAME)));
-$page = new admin_settingpage('pnpconfs', get_string('pnpconfs', PLUGIN_NAME));
+$ADMIN->add('localplugins', new admin_category('local_pnp', get_string('pluginname', 'local_pnp')));
+$page = new admin_settingpage('pnpconfs', get_string('pnpconfs', 'local_pnp'));
 //dependecy ldap settingslib
 require_once($CFG->dirroot . '/enrol/ldap/settingslib.php');
 
 
 $page->add(new admin_setting_configtext(
-    PLUGIN_NAME . '/certid',
-    get_string('certid', PLUGIN_NAME),
-    get_string('certid_', PLUGIN_NAME),
-    '',
-    PARAM_INT,
-));
-
-$page->add(new admin_setting_configtext_trim_lower(
-    PLUGIN_NAME . '/uribase',
-    get_string('uribase', PLUGIN_NAME),
-    get_string('uribase_', PLUGIN_NAME),
+    'local_pnp' . '/certid',
+    get_string('certid', 'local_pnp'),
+    get_string('certid_', 'local_pnp'),
     '',
     true,
 ));
 
 $page->add(new admin_setting_configtext_trim_lower(
-    PLUGIN_NAME . '/token',
-    get_string('token', PLUGIN_NAME),
-    get_string('token_', PLUGIN_NAME),
+    'local_pnp' . '/uribase',
+    get_string('uribase', 'local_pnp'),
+    get_string('uribase_', 'local_pnp'),
+    '',
+    true,
+));
+
+$page->add(new admin_setting_configtext_trim_lower(
+    'local_pnp' . '/token',
+    get_string('token', 'local_pnp'),
+    get_string('token_', 'local_pnp'),
+    '',
+    false,
+));
+
+$page->add(new admin_setting_configtext_trim_lower(
+    'local_pnp' . '/auth_token',
+    get_string('auth_token', 'local_pnp'),
+    get_string('auth_token_', 'local_pnp'),
     '',
     false,
 ));
 
 $ADMIN->add('local_pnp', $page);
-
-
