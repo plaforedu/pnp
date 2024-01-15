@@ -6,9 +6,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// require_once("../locallib.php");
-// require_once("servicelib.php");
-
 // Exemplo: curl -H "Authentication: Token changeme" http://ava/local/pnp/api/?get_certificates&cpf=12345678901
 
 

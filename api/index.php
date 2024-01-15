@@ -37,7 +37,7 @@ class service
 
     function authenticate()
     {
-        $auth_token = \get_config('local_suap', 'auth_token');
+        $auth_token = \get_config('local_pnp', 'auth_token');
 
         $headers = getallheaders();
         $authentication_key = array_key_exists('Authentication', $headers) ? "Authentication" : "authentication";
